@@ -23,7 +23,19 @@ public class JokeController {
         return ResponseEntity.ok(service.save(joke));
     }
     @GetMapping
-    public ArrayList<Joke> getAllJokes(){
-        return service.findAll();
+    public ResponseEntity<ArrayList<Joke>> getAllJokes(){
+        return ResponseEntity.ok(service.findAll());
+    }
+    @GetMapping("/{id}")
+    public ResponseEntity<Joke> getJokeById(@PathVariable Long id){
+        return ResponseEntity.ok(service.findById(id));
+    }
+    @PatchMapping("/{id}")
+    public ResponseEntity<Joke> updateJoke(@PathVariable Long id, @RequestBody Joke joke){
+        return ResponseEntity.ok(service.updateJokeById(id, joke));
+    }
+    @DeleteMapping("/{id}")
+    public void deleteJokeById(@PathVariable Long id){
+        service.delete(id);
     }
 }
