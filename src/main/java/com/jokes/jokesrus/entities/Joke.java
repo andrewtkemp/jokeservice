@@ -1,5 +1,6 @@
 package com.jokes.jokesrus.entities;
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Table(name = "jokes")
@@ -41,5 +42,20 @@ public class Joke {
 
     public void setJoke(String joke) {
         this.joke = joke;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Joke joke1 = (Joke) o;
+        return id.equals(joke1.id) &&
+                jokeType == joke1.jokeType &&
+                joke.equals(joke1.joke);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, jokeType, joke);
     }
 }
