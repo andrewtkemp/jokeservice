@@ -36,49 +36,49 @@ class JokeControllerTest {
     @Autowired
     ObjectMapper mapper;
 //    POST: new joke - accept any joke in one of the specified categories
-    @Test
-    void postNewJoke() throws Exception {
-        Joke joke = new Joke(JokeType.TECHNOLOGY, "Tech Joke");
-        String json = mapper.writeValueAsString(joke);
-//        when(jokeService.save(ArgumentMatchers.any(Joke.class))).thenReturn(json);
-        mvc.perform(post(url).content(json).contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.id").value(joke.getId()))
-                .andExpect(jsonPath("$.jokeType").value(joke.getJokeType()))
-                .andExpect(jsonPath("$.joke").value(joke.getJoke()));
-    }
+//    @Test
+//    void postNewJoke() throws Exception {
+//        Joke joke = new Joke(JokeType.TECHNOLOGY, "Tech Joke");
+//        String json = mapper.writeValueAsString(joke);
+////        when(jokeService.save(ArgumentMatchers.any(Joke.class))).thenReturn(json);
+//        mvc.perform(post(url).content(json).contentType(MediaType.APPLICATION_JSON))
+//                .andExpect(status().isOk())
+//                .andExpect(jsonPath("$.id").value(joke.getId()))
+//                .andExpect(jsonPath("$.jokeType").value(joke.getJokeType()))
+//                .andExpect(jsonPath("$.joke").value(joke.getJoke()));
+//    }
 //    GET: all jokes in db
-    @Test
-    void getAllJokes() throws Exception {
-        Joke joke = new Joke(JokeType.TECHNOLOGY, "Tech Joke");
-        Joke joke2 = new Joke(JokeType.DADJOKES, "Dad Joke");
-        Joke joke3 = new Joke(JokeType.KIDJOKES, "Kid Joke");
-        ArrayList<Joke> jokes = new ArrayList<>();
-        jokes.add(joke);
-        jokes.add(joke2);
-        jokes.add(joke3);
-        String json = mapper.writeValueAsString(jokes);
-//        when(jokeService.getJokes()).thenReturn(jokes);
-        mvc.perform(get(url).content(json).contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$", hasSize(jokes.size())));
-    }
+//    @Test
+//    void getAllJokes() throws Exception {
+//        Joke joke = new Joke(JokeType.TECHNOLOGY, "Tech Joke");
+//        Joke joke2 = new Joke(JokeType.DADJOKES, "Dad Joke");
+//        Joke joke3 = new Joke(JokeType.KIDJOKES, "Kid Joke");
+//        ArrayList<Joke> jokes = new ArrayList<>();
+//        jokes.add(joke);
+//        jokes.add(joke2);
+//        jokes.add(joke3);
+//        String json = mapper.writeValueAsString(jokes);
+////        when(jokeService.getJokes()).thenReturn(jokes);
+//        mvc.perform(get(url).content(json).contentType(MediaType.APPLICATION_JSON))
+//                .andExpect(status().isOk())
+//                .andExpect(jsonPath("$", hasSize(jokes.size())));
+//    }
 //    GET: all jokes containing a given search string (bonus: add optional category to search)
-    @Test
-    void searchAllJokes() throws Exception {
-        Joke joke = new Joke(JokeType.TECHNOLOGY, "Tech Joke");
-        Joke joke2 = new Joke(JokeType.DADJOKES, "Dad Joke");
-        Joke joke3 = new Joke(JokeType.KIDJOKES, "Kid Joke");
-        ArrayList<Joke> jokes = new ArrayList<>();
-        jokes.add(joke);
-        jokes.add(joke2);
-        jokes.add(joke3);
-        String json = mapper.writeValueAsString(jokes);
-        when(jokeService.findAll()).thenReturn(jokes);
-        mvc.perform(get(url).content(json).contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$", hasSize(jokes.size())));
-    }
+//    @Test
+//    void searchAllJokes() throws Exception {
+//        Joke joke = new Joke(JokeType.TECHNOLOGY, "Tech Joke");
+//        Joke joke2 = new Joke(JokeType.DADJOKES, "Dad Joke");
+//        Joke joke3 = new Joke(JokeType.KIDJOKES, "Kid Joke");
+//        ArrayList<Joke> jokes = new ArrayList<>();
+//        jokes.add(joke);
+//        jokes.add(joke2);
+//        jokes.add(joke3);
+//        String json = mapper.writeValueAsString(jokes);
+//        when(jokeService.findAll()).thenReturn(jokes);
+//        mvc.perform(get(url).content(json).contentType(MediaType.APPLICATION_JSON))
+//                .andExpect(status().isOk())
+//                .andExpect(jsonPath("$", hasSize(jokes.size())));
+//    }
 ////    GET: all jokes by category
 //    @Test
 //    void getAllJokesByCategory() throws Exception {
