@@ -40,7 +40,7 @@ class JokeControllerTest {
     void postNewJoke() throws Exception {
         Joke joke = new Joke(JokeType.TECHNOLOGY, "Tech Joke");
         String json = mapper.writeValueAsString(joke);
-        when(jokeService.save(ArgumentMatchers.any(Joke.class))).thenReturn(json);
+//        when(jokeService.save(ArgumentMatchers.any(Joke.class))).thenReturn(json);
         mvc.perform(post(url).content(json).contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(joke.getId()))
@@ -58,7 +58,7 @@ class JokeControllerTest {
         jokes.add(joke2);
         jokes.add(joke3);
         String json = mapper.writeValueAsString(jokes);
-        when(jokeService.getJokes()).thenReturn(jokes);
+//        when(jokeService.getJokes()).thenReturn(jokes);
         mvc.perform(get(url).content(json).contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(jokes.size())));
@@ -100,8 +100,8 @@ class JokeControllerTest {
     void getRandomJoke() throws Exception {
         Joke joke = new Joke(JokeType.TECHNOLOGY, "Tech Joke");
         String json = mapper.writeValueAsString(joke);
-        when(jokeService.getJokes()).thenReturn(joke);
-        mvc.perform(get(url).content(json).contentType(MediaType.APPLICATION_JSON))
+        String randomUrl = url + "/random";
+        mvc.perform(get(randomUrl).content(json).contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(jokes.size())));
     }
@@ -110,7 +110,6 @@ class JokeControllerTest {
     void updateJoke() throws Exception {
         Joke joke = new Joke(JokeType.TECHNOLOGY, "Tech Joke");
         String json = mapper.writeValueAsString(joke);
-        when(jokeService.getJokes()).thenReturn(joke);
         mvc.perform(patch(url)
                 .param("jokeType", "DADJOKES")
                 .contentType(MediaType.APPLICATION_JSON))
@@ -120,8 +119,7 @@ class JokeControllerTest {
     @Test
     void deleteJokeById() throws Exception {
         Joke joke = new Joke(JokeType.TECHNOLOGY, "Tech Joke");
-        String json = mapper.writeValueAsString(joke);
-        when(jokeService.deleteJokeById()).thenReturn(joke);
+        when(jokeService.delete(joke.getId())).thenReturn(null);
         mvc.perform(delete(url + joke.getId())).andExpect(status().isOk());
     }
 }

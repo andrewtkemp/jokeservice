@@ -17,7 +17,7 @@ EXPOSE 8080
 # $ docker build -t jokeservice .
 #
 # Deploy joke service locally
-# $ run -p 8080:8080 jokeservice
+# $ docker run -p 8080:8080 jokeservice
 # should be available at http://localhost:8080/api/jokes
 #
 # Push to dockerhub

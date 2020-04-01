@@ -3,35 +3,23 @@ package com.jokes.jokesrus.services;
 import com.jokes.jokesrus.entities.Joke;
 import com.jokes.jokesrus.repositories.JokeDAO;
 import org.springframework.stereotype.Service;
-import org.springframework.beans.factory.annotation.Autowired;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Optional;
 
-//@Service
-//public class JokeService {
-//    private JokeDAO jokeDao;
-//
-//    public JokeService (JokeDao jokeDao){
-//        this.jokeDao = jokeDao;
-//    }
-//
-//
-//    //CREATE
-//
-//
-//    public Joke save(Joke joke) {
-//        return jokeDao.save(joke);
-//    }
-//
-//
-//    //READ
-//
-//
-//    public List<Joke> findAll() {
-//        return jokeDao.findAll();
-//    }
+@Service
+public class JokeService {
+    private JokeDAO jokeDao;
+
+    public JokeService (JokeDAO jokeDao){
+        this.jokeDao = jokeDao;
+    }
+    public Joke save(Joke joke) {
+        return jokeDao.save(joke);
+    }
+
+    public ArrayList<Joke> findAll() {
+        return (ArrayList<Joke>) jokeDao.findAll();
+    }
 //
 //    public Joke findById(Long id) {
 //        if (jokeDao.existsById(id)){
@@ -96,8 +84,4 @@ import java.util.Optional;
 //            jokeDao.deleteById(id);
 //        }
 //    }
-//}
-@Service
-public class JokeService {
-
 }
